@@ -7,6 +7,9 @@ from yt_dlp import YoutubeDL
 from typing import Dict
 import signal
 
+# נוצר ע"י @the_joker121 בטלגרם. לערוץ https://t.me/bot_sratim_sdarot
+# אל תמחק את הקרדיט הזה🥹
+# לבוט דוגמא חפש בטלגרם @Music_Yt_RoBot
 
 TOKEN = 'שים_פה_את_הטוקן_של_הבוט_שלך'
 
@@ -14,7 +17,7 @@ COOKIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cookies
 
 message_searches = {}
 
-AUDIO_CACHE_CHANNEL = -1002402574884
+AUDIO_CACHE_CHANNEL = # שים פה את המזהה של הערוץ אחסון
 
 audio_cache = {}
 
@@ -46,7 +49,7 @@ async def search_song(update: Update, context: ContextTypes.DEFAULT_TYPE):
     }
     
     try:
-        # הפעלת החיפוש בתהליך נפרד כדי לא לחסום את הבוט
+        
         with YoutubeDL(ydl_opts) as ydl:
             results = await asyncio.get_event_loop().run_in_executor(
                 None, 
@@ -134,7 +137,6 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
         message_id = int(data_parts[2])
         user_id = query.from_user.id
         
-        # בדיקה אם למשתמש יש הורדה פעילה
         if user_id in active_downloads:
             await query.answer("יש לך הורדה פעילה כרגע. אנא המתן לסיומה או בטל אותה.", show_alert=True)
             return
@@ -145,7 +147,6 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             reply_markup=InlineKeyboardMarkup(keyboard)
         )
         
-        # התחלת הורדה חדשה
         download_info = {
             'video_id': video_id,
             'status_message': query.message,
@@ -169,7 +170,7 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
             return
             
         if user_id in active_downloads:
-            # ביטול מיידי של התהליך
+            
             download_info = active_downloads[user_id]
             if download_info['process']:
                 try:
@@ -177,7 +178,6 @@ async def button_callback(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 except:
                     pass
             
-            # מחיקת הקובץ אם קיים
             if download_info['filename'] and os.path.exists(download_info['filename']):
                 try:
                     os.remove(download_info['filename'])
@@ -196,7 +196,7 @@ async def download_and_send_song(query, bot, download_info):
     original_message_id = download_info['original_message_id']
     
     try:
-        # בדיקה אם השיר כבר קיים במטמון
+        
         if video_id in audio_cache:
             cached_message_id = audio_cache[video_id]
             try:
@@ -212,8 +212,7 @@ async def download_and_send_song(query, bot, download_info):
                 del audio_cache[video_id]
         
         link = f"https://www.youtube.com/watch?v={video_id}"
-        
-        # קבלת פרטי השיר בתהליך נפרד
+
         process = await asyncio.create_subprocess_exec(
             'yt-dlp',
             '--cookies', COOKIES_FILE,
@@ -228,15 +227,14 @@ async def download_and_send_song(query, bot, download_info):
         
         if process.returncode != 0:
             raise Exception(f"שגיאה בקבלת מידע: {stderr.decode()}")
-        
+
         song_info = stdout.decode().strip().split('\n')
         song_title = song_info[0]
         duration = song_info[1] if len(song_info) > 1 else "N/A"
         
         clean_title = song_title.replace('"', '')
         download_info['filename'] = f"{clean_title}.mp3"
-        
-        # הורדת השיר בתהליך נפרד
+
         process = await asyncio.create_subprocess_exec(
             'yt-dlp',
             '--cookies', COOKIES_FILE,
@@ -252,13 +250,12 @@ async def download_and_send_song(query, bot, download_info):
 
         if not os.path.exists(download_info['filename']):
             raise Exception("הקובץ לא נוצר")
+
         
-        # יצירת כיתוב לשיר
         caption = f"🎵 שם: {clean_title}\n" \
                  f"⏱ משך: {duration}\n\n" \
                  f"Uploaded by @Music_Yt_RoBot"
-
-        # שליחה לערוץ המטמון
+        
         with open(download_info['filename'], 'rb') as audio_file:
             cache_message = await bot.send_audio(
                 chat_id=AUDIO_CACHE_CHANNEL,
@@ -267,10 +264,8 @@ async def download_and_send_song(query, bot, download_info):
                 title=clean_title
             )
             
-            # שמירה במטמון
             audio_cache[video_id] = cache_message.message_id
             
-            # שליחה למשתמש
             await bot.copy_message(
                 chat_id=query.message.chat_id,
                 from_chat_id=AUDIO_CACHE_CHANNEL,
@@ -295,7 +290,6 @@ async def download_and_send_song(query, bot, download_info):
         if user_id in active_downloads:
             del active_downloads[user_id]
         
-        # ניקוי סופי של הקובץ אם קיים
         if download_info['filename'] and os.path.exists(download_info['filename']):
             try:
                 os.remove(download_info['filename'])
@@ -317,3 +311,4 @@ if __name__ == '__main__':
 
 # נוצר ע"י @the_joker121 בטלגרם. לערוץ https://t.me/bot_sratim_sdarot
 # אל תמחק את הקרדיט הזה🥹
+# לבוט דוגמא חפש בטלגרם @Music_Yt_RoBot
