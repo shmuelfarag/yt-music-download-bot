@@ -4,4 +4,5 @@
 פשוט שולחים לבוט שם של שיר/זמר והבוט נותן 50 תוצאות חיפוש (10 בכל עמוד).
 
 [לבוט דוגמא](https://t.me/Music_Yt_RoBot)🤖
-[לערוץ עדכונים](https://t.me/bot_sratim_sdarot)
+
+[לערוץ עדכונים](https://t.me/bot_sratim_sdarot)📢
