@@ -3,4 +3,5 @@
 מוריד שירים מיוטיוב לטלגרם ע"י חיפוש מטקסט📥
 פשוט שולחים לבוט שם של שיר/זמר והבוט נותן 50 תוצאות חיפוש (10 בכל עמוד).
 
-**לבוט דוגמא @Music_Yt_RoBot**
+[לבוט דוגמא](https://t.me/Music_Yt_RoBot)🤖
+[לערוץ עדכונים](https://t.me/bot_sratim_sdarot)
