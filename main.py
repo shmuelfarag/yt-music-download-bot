@@ -304,12 +304,11 @@ def run_web_server():
     uvicorn.run(app, host="0.0.0.0", port=8000)
 
 def main():
-    # הפעל את שרת הweb בthread נפרד
+    
     web_thread = threading.Thread(target=run_web_server)
     web_thread.daemon = True
     web_thread.start()
 
-    # הקוד המקורי שלך
     application = Application.builder().token(TOKEN).build()
     
     application.add_handler(CommandHandler("start", start))
