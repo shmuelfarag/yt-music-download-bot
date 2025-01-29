@@ -11,13 +11,14 @@ import signal
 # אל תמחק את הקרדיט הזה🥹
 # לבוט דוגמא חפש בטלגרם @Music_Yt_RoBot
 
-TOKEN = 'שים_פה_את_הטוקן_של_הבוט_שלך'
+import os
+TOKEN = os.getenv('TOKEN')
+
+AUDIO_CACHE_CHANNEL = int(os.getenv('AUDIO_CACHE_CHANNEL'))
 
 COOKIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cookies.txt')
 
 message_searches = {}
-
-AUDIO_CACHE_CHANNEL = # שים פה את המזהה של הערוץ אחסון
 
 audio_cache = {}
 
