@@ -6,6 +6,9 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters, C
 from yt_dlp import YoutubeDL
 from typing import Dict
 import signal
+import uvicorn
+from web_server import app
+import threading
 
 # נוצר ע"י @the_joker121 בטלגרם. לערוץ https://t.me/bot_sratim_sdarot
 # אל תמחק את הקרדיט הזה🥹
@@ -297,7 +300,16 @@ async def download_and_send_song(query, bot, download_info):
             except:
                 pass
 
+def run_web_server():
+    uvicorn.run(app, host="0.0.0.0", port=8000)
+
 def main():
+    # הפעל את שרת הweb בthread נפרד
+    web_thread = threading.Thread(target=run_web_server)
+    web_thread.daemon = True
+    web_thread.start()
+
+    # הקוד המקורי שלך
     application = Application.builder().token(TOKEN).build()
     
     application.add_handler(CommandHandler("start", start))
