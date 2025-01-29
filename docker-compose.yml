@@ -1,0 +1,7 @@
+version: '3'
+services:
+  bot:
+    build: .
+    environment:
+      - TOKEN=your_token_here
+      - AUDIO_CACHE_CHANNEL=your_channel_id
