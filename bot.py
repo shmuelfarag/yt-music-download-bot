@@ -8,7 +8,7 @@ from typing import Dict
 import signal
 
 
-TOKEN = '7693225562:AAEdSv2iqwW3t4lH8Fzsasza2-AbXG_1AX0'
+TOKEN = 'שים_פה_את_הטוקן_של_הבוט_שלך'
 
 COOKIES_FILE = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'cookies.txt')
 
