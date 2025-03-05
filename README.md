@@ -6,9 +6,11 @@
 ## התקנה
 
 1. התקן את הדרישות:
-```pip install -r requirements.txt```
+2. ```
+   pip install -r requirements.txt
+```
 
-3. הגדר את משתני הסביבה:
+5. הגדר את משתני הסביבה:
 - `TOKEN` - טוקן של הבוט בטלגרם
 - `AUDIO_CACHE_CHANNEL` - מזהה של ערוץ האחסון
 
