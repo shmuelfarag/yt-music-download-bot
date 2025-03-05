@@ -5,7 +5,7 @@
 
 ## התקנה
 
-1. התקן את הדרישות
+1. התקן את הספריות 
 ```
    pip install -r requirements.txt
 ```
