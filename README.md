@@ -5,13 +5,15 @@
 
 ## התקנה
 
-1. התקן את הדרישות:
-2. ```
+1. התקן את הדרישות
+```
    pip install -r requirements.txt
+```
 
 2 הגדר את משתני הסביבה:
-- `TOKEN` - טוקן של הבוט בטלגרם
-- `AUDIO_CACHE_CHANNEL` - מזהה של ערוץ האחסון
+`TOKEN` - טוקן של הבוט
+`AUDIO_CACHE_CHANNEL` - מזהה של ערוץ האחסון
+
 
 3. הרץ את הבוט:
 ```python main.py```
