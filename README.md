@@ -22,4 +22,4 @@
 ## 
 [לבוט דוגמא](https://t.me/Music_Yt_RoBot)🤖
 
-[לערוץ עדכונים](https://t.me/bot_sratim_sdarot)📢
+[לערוץ עדכונים](https://t.me/The_Joker_Bots)📢
